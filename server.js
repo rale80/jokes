@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 const error = require('./middlewares/error');
 const logger = require('./middlewares/logger');
+const usersRouter = require('./routes/api/users');
 
 const db = process.env.MONGO_URI;
 mongoose
@@ -29,6 +30,8 @@ process.on('unhandledRejection', ex => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({ exposedHeaders: 'Authorization' }));
+
+app.use('/api/users', usersRouter);
 
 app.use(error);
 
