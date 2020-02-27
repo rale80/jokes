@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 5000;
 const error = require('./middlewares/error');
 const logger = require('./middlewares/logger');
 const usersRouter = require('./routes/api/users');
+const jokesRouter = require('./routes/api/jokes');
 
 const db = process.env.MONGO_URI;
 mongoose
@@ -32,6 +33,7 @@ app.use(express.json());
 app.use(cors({ exposedHeaders: 'Authorization' }));
 
 app.use('/api/users', usersRouter);
+app.use('/api/jokes', jokesRouter);
 
 app.use(error);
 
