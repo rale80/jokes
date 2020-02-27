@@ -13,7 +13,7 @@ const JokesList = props => {
 	});
 
 	return (
-		<div className="jokes">
+		<div className="jokes d-md-flex justify-content-between">
 			{jokes.map(joke => (
 				<JokeItem key={joke._id} joke={joke} />
 			))}
