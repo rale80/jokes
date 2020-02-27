@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import JokeItem from './JokeItem';
+import axios from 'axios';
 
 const JokesList = props => {
-	return <h1>Jokes</h1>;
+	const [jokes, setJokes] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get('/api/jokes')
+			.then(res => setJokes(res.data))
+			.catch(err => console.log(err));
+	});
+
+	return (
+		<div className="jokes">
+			{jokes.map(joke => (
+				<JokeItem key={joke._id} joke={joke} />
+			))}
+		</div>
+	);
 };
 
 export default JokesList;
