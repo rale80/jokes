@@ -31,7 +31,7 @@ const TextAreaFieldGroup = ({
 
 TextAreaFieldGroup.propTypes = {
 	name: PropTypes.string.isRequired,
-	rows: PropTypes.string,
+	rows: PropTypes.number,
 	placeholder: PropTypes.string,
 	value: PropTypes.string.isRequired,
 	info: PropTypes.string,

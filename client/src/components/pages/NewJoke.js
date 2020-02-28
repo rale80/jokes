@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-// import { connect } from 'react-redux';
-// import { loginUser, clearErrors } from '../../redux/actions/authActions';
 
 const NewJoke = props => {
 	const [text, setText] = useState('');
@@ -22,8 +20,6 @@ const NewJoke = props => {
 		console.log(jokeData);
 		// this.props.saveJoke(jokeData, this.props.history);
 	};
-
-	// const { errors } = this.props;
 
 	return (
 		<div className="newjoke">
@@ -49,12 +45,6 @@ const NewJoke = props => {
 			</div>
 		</div>
 	);
-};
-
-NewJoke.propTypes = {
-	clearErrors: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
 };
 
 export default NewJoke;

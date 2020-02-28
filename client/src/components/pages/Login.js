@@ -1,28 +1,32 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { loginUser, clearErrors } from '../../redux/actions/authActions';
 
 const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	// componentDidMount() {
-	// 	if (this.props.auth.isAuthenticated) {
-	// 		this.props.history.push('/dashboard');
-	// 	}
-	// }
-	// componentWillUnmount() {
-	// 	this.props.clearErrors();
-	// }
+	const auth = useSelector(state => state.auth);
+	const errors = useSelector(state => state.errors);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (auth.isAuthenticated) {
+			props.history.push('/');
+		}
+
+		return () => {
+			dispatch(clearErrors());
+		};
+	}, [auth.isAuthenticated, dispatch, props.history]);
 
 	const submitLogin = e => {
 		e.preventDefault();
 		const userData = { email, password };
-		console.log(userData);
-		// this.props.loginUser(userData, this.props.history);
-	};
 
-	// const { errors } = this.props;
+		dispatch(loginUser(userData, props.history));
+	};
 
 	return (
 		<div className="login">
@@ -38,7 +42,7 @@ const Login = props => {
 								type="text"
 								placeholder="Email Address"
 								name="email"
-								// error={errors.email}
+								error={errors.email}
 							/>
 							<TextFieldGroup
 								value={password}
@@ -46,7 +50,7 @@ const Login = props => {
 								type="password"
 								placeholder="Password"
 								name="password"
-								// error={errors.password}
+								error={errors.password}
 							/>
 							<input type="submit" className="btn btn-info btn-block mt-4" />
 						</form>
@@ -56,12 +60,5 @@ const Login = props => {
 		</div>
 	);
 };
-
-// Login.propTypes = {
-// 	loginUser: PropTypes.func.isRequired,
-// 	clearErrors: PropTypes.func.isRequired,
-// 	auth: PropTypes.object.isRequired,
-// 	errors: PropTypes.object.isRequired
-// };
 
 export default Login;

@@ -1,5 +1,7 @@
 import { SET_CURRENT_USER, GET_ERRORS, CLEAR_ERRORS } from '../actionTypes';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import setAuthHeader from '../../utils/setAuthHeader';
 
 // Register user
 export const registerUser = (userData, history) => dispatch => {
@@ -15,7 +17,25 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login user
-export const loginUser = (userData, history) => dispatch => {};
+export const loginUser = (userData, history) => dispatch => {
+	axios
+		.post('/api/users/login', userData)
+		.then(res => {
+			const { token } = res.data;
+			localStorage.setItem('jwtToken', token);
+			setAuthHeader(token);
+
+			const decoded = jwtDecode(token);
+			dispatch(setCurrentUser(decoded));
+			history.push('/');
+		})
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			});
+		});
+};
 
 // Set logged in user
 export const setCurrentUser = decoded => {

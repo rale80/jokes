@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { registerUser, clearErrors } from '../../redux/actions/authActions';
 
@@ -77,12 +76,5 @@ const Register = props => {
 		</div>
 	);
 };
-
-// Register.propTypes = {
-// 	registerUser: PropTypes.func.isRequired,
-// 	clearErrors: PropTypes.func.isRequired,
-// 	auth: PropTypes.object.isRequired,
-// 	errors: PropTypes.object.isRequired
-// };
 
 export default Register;

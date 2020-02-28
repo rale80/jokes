@@ -10,7 +10,7 @@ const Featured = props => {
 			.get('/api/jokes/top')
 			.then(res => setTopJokes(res.data))
 			.catch(err => console.log(err));
-	});
+	}, []);
 
 	return (
 		<div className="featured">
