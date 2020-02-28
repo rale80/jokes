@@ -36,7 +36,7 @@ const NewJoke = props => {
 							<TextAreaFieldGroup
 								value={text}
 								rows={5}
-								onChange={e => setText(e.target.text)}
+								onChange={e => setText(e.target.value)}
 								type="text"
 								placeholder="Joke text"
 								name="text"

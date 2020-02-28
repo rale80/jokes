@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
-// import { connect } from 'react-redux';
-// import { loginUser, clearErrors } from '../../redux/actions/authActions';
 
 const Login = props => {
 	const [email, setEmail] = useState('');
@@ -36,7 +34,7 @@ const Login = props => {
 						<form onSubmit={submitLogin}>
 							<TextFieldGroup
 								value={email}
-								onChange={e => setEmail(e.target.email)}
+								onChange={e => setEmail(e.target.value)}
 								type="text"
 								placeholder="Email Address"
 								name="email"
@@ -44,7 +42,7 @@ const Login = props => {
 							/>
 							<TextFieldGroup
 								value={password}
-								onChange={e => setPassword(e.target.password)}
+								onChange={e => setPassword(e.target.value)}
 								type="password"
 								placeholder="Password"
 								name="password"
@@ -59,11 +57,11 @@ const Login = props => {
 	);
 };
 
-Login.propTypes = {
-	loginUser: PropTypes.func.isRequired,
-	clearErrors: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
-};
+// Login.propTypes = {
+// 	loginUser: PropTypes.func.isRequired,
+// 	clearErrors: PropTypes.func.isRequired,
+// 	auth: PropTypes.object.isRequired,
+// 	errors: PropTypes.object.isRequired
+// };
 
 export default Login;

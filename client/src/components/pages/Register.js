@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
-// import { connect } from 'react-redux';
-// import { registerUser, clearErrors } from '../../redux/actions/authActions';
+import { registerUser, clearErrors } from '../../redux/actions/authActions';
 
 const Register = props => {
 	const [username, setUsername] = useState('');
@@ -10,23 +10,24 @@ const Register = props => {
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
 
-	// componentDidMount() {
-	// 	if (this.props.auth.isAuthenticated) {
-	// 		this.props.history.push('/dashboard');
-	// 	}
-	// }
-	// componentWillUnmount() {
-	// 	this.props.clearErrors();
-	// }
+	const auth = useSelector(state => state.auth);
+	const errors = useSelector(state => state.errors);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (auth.isAuthenticated) {
+			props.history.push('/');
+		}
+		return () => {
+			dispatch(clearErrors());
+		};
+	}, [auth.isAuthenticated, dispatch, props.history]);
 
 	const submitRegister = e => {
 		e.preventDefault();
 		const newUser = { username, email, password, password2 };
-		console.log(newUser);
-		// this.props.registerUser(newUser, this.props.history);
+		dispatch(registerUser(newUser, props.history));
 	};
-
-	// const { errors } = this.props;
 
 	return (
 		<div className="register">
@@ -38,35 +39,35 @@ const Register = props => {
 						<form onSubmit={submitRegister} noValidate>
 							<TextFieldGroup
 								value={username}
-								onChange={e => setUsername(e.target.username)}
+								onChange={e => setUsername(e.target.value)}
 								type="text"
 								placeholder="Username"
 								name="username"
-								// error={errors.username}
+								error={errors.username}
 							/>
 							<TextFieldGroup
 								value={email}
-								onChange={e => setEmail(e.target.email)}
+								onChange={e => setEmail(e.target.value)}
 								type="text"
 								placeholder="Email Address"
 								name="email"
-								// error={errors.email}
+								error={errors.email}
 							/>
 							<TextFieldGroup
 								value={password}
-								onChange={e => setPassword(e.target.password)}
+								onChange={e => setPassword(e.target.value)}
 								type="password"
 								placeholder="Password"
 								name="password"
-								// error={errors.password}
+								error={errors.password}
 							/>
 							<TextFieldGroup
 								value={password2}
-								onChange={e => setPassword2(e.target.password2)}
+								onChange={e => setPassword2(e.target.value)}
 								type="password"
 								placeholder="Confirm Password"
 								name="password2"
-								// error={errors.password2}
+								error={errors.password2}
 							/>
 							<input type="submit" className="btn btn-info btn-block mt-4" />
 						</form>
@@ -77,11 +78,11 @@ const Register = props => {
 	);
 };
 
-Register.propTypes = {
-	registerUser: PropTypes.func.isRequired,
-	clearErrors: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
-};
+// Register.propTypes = {
+// 	registerUser: PropTypes.func.isRequired,
+// 	clearErrors: PropTypes.func.isRequired,
+// 	auth: PropTypes.object.isRequired,
+// 	errors: PropTypes.object.isRequired
+// };
 
 export default Register;

@@ -45,7 +45,7 @@ const Navbar = props => {
 						</li>
 						<li className="nav-item">
 							<Link className="nav-link" to="#" onClick={onLogoutClick}>
-								<i class="fas fa-user-astronaut"></i> Logout
+								<i className="fas fa-user-astronaut"></i> Logout
 							</Link>
 						</li>
 					</ul>
