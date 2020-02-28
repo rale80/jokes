@@ -1,12 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = props => {
+	const onLogoutClick = () => {};
+
 	return (
 		<header className="main-header">
 			<nav className="navbar navbar-expand-md navbar-light">
-				<a className="navbar-brand" href="#">
+				<Link className="navbar-brand" to="/">
 					Jokes
-				</a>
+				</Link>
 				<button
 					className="navbar-toggler"
 					type="button"
@@ -20,30 +23,30 @@ const Navbar = props => {
 
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav ml-auto">
-						<li className="nav-item active">
-							<a className="nav-link" href="#">
+						<li className="nav-item">
+							<Link className="nav-link" to="/">
 								Home
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
+							<Link className="nav-link" to="/newjoke">
 								New Joke
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
+							<Link className="nav-link" to="/register">
 								Register
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
+							<Link className="nav-link" to="/login">
 								Login
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
-								Logout
-							</a>
+							<Link className="nav-link" to="#" onClick={onLogoutClick}>
+								<i class="fas fa-user-astronaut"></i> Logout
+							</Link>
 						</li>
 					</ul>
 				</div>

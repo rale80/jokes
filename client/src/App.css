@@ -2,6 +2,7 @@
 .app {
 	background: rgb(245, 244, 241);
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+	min-height: 100vh;
 }
 
 a.navbar-brand {
@@ -9,6 +10,7 @@ a.navbar-brand {
 	font-size: 70px;
 	transform: rotate(-10deg);
 	margin-top: -20px;
+	text-shadow: 1px 1px 3px rgba(15, 90, 100, 0.4);
 }
 
 .info {
