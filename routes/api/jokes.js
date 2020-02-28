@@ -22,6 +22,23 @@ router.get('/', (req, res) => {
 });
 
 /**
+ * @route		Get api/jokes/top
+ * @desc  	Get top 3 jokes
+ * @access	Public
+ */
+router.get('/top', (req, res) => {
+	Joke.find({})
+		.populate('author', 'username')
+		.exec((err, jokes) => {
+			if (err) return logger.error(err);
+			let sorted = jokes
+				.sort((prev, curr) => (prev.likes.length >= curr.likes.length ? 1 : -1))
+				.slice(0, 3);
+			return res.status(200).json(sorted);
+		});
+});
+
+/**
  * @route		Get api/jokes/:jokeId
  * @desc  	Get joke by id
  * @access	Public

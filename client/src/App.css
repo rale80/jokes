@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Marck+Script|Yellowtail&display=swap');
-.App {
+.app {
 	background: rgb(245, 244, 241);
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
 }
@@ -11,15 +11,20 @@ a.navbar-brand {
 	margin-top: -20px;
 }
 
-@media (min-width: 768px) {
-	.card {
-		width: 33%;
-	}
-}
-
 .info {
 	width: 80%;
 	margin: 20px auto;
 	font-family: 'Marck Script', cursive;
 	font-size: 18px;
+}
+
+.featured h3,
+.jokes h3 {
+	margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+	.card {
+		width: 33%;
+	}
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Featured from '../Featured';
+import Featured from '../jokes/Featured';
 import JokesList from '../jokes/JokesList';
 
 const Home = props => {
