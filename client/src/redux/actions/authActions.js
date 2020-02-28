@@ -45,7 +45,7 @@ export const setCurrentUser = decoded => {
 	};
 };
 
-// Clear errrors (my addition)
+// Clear errrors
 export const clearErrors = () => {
 	return {
 		type: CLEAR_ERRORS,

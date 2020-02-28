@@ -15,7 +15,7 @@ const JokesList = props => {
 	return (
 		<div className="jokes">
 			<h3>All Jokes</h3>
-			<div className="d-md-flex justify-content-between">
+			<div className="d-md-flex flex-wrap">
 				{jokes.map(joke => (
 					<JokeItem key={joke._id} joke={joke} />
 				))}
