@@ -31,8 +31,9 @@ router.get('/top', (req, res) => {
 		.populate('author', 'username')
 		.exec((err, jokes) => {
 			if (err) return logger.error(err);
+
 			let sorted = jokes
-				.sort((prev, curr) => (prev.likes.length >= curr.likes.length ? 1 : -1))
+				.sort((prev, curr) => (prev.likes.length >= curr.likes.length ? -1 : 1))
 				.slice(0, 3);
 			return res.status(200).json(sorted);
 		});
@@ -206,7 +207,7 @@ router.post('/comments/:jokeId', auth, (req, res) => {
 
 	Joke.findById(jokeId)
 		.then(joke => {
-			const newComment = { text, author: user.id };
+			const newComment = { text, author: user.id, username: user.username };
 
 			joke.comments.unshift(newComment);
 			joke
@@ -239,7 +240,8 @@ router.delete('/comments/:jokeId/:commentId', auth, (req, res) => {
 
 			const commentIndex = joke.comments.findIndex(
 				comment =>
-					comment._id.toString() === commentId && comment.author === user.id
+					comment._id.toString() === commentId &&
+					comment.author.toString() === user.id
 			);
 
 			if (commentIndex !== -1) {

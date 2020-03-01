@@ -1,8 +1,8 @@
 import { SET_CURRENT_USER } from '../actionTypes';
-import isEmpty from 'lodash';
+import { isEmpty } from 'lodash';
 
 const initialState = {
-	isLoading: false,
+	isAuthenticated: false,
 	user: {}
 };
 
@@ -11,7 +11,7 @@ const authReducer = (state = initialState, action) => {
 		case SET_CURRENT_USER:
 			return {
 				...state,
-				isLoading: !isEmpty(state.payload),
+				isAuthenticated: !isEmpty(action.payload),
 				user: action.payload
 			};
 		default:

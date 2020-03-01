@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import JokeItem from './JokeItem';
-import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTopJokes } from '../../redux/actions/jokeActions';
+import Spinner from '../common/Spinner';
 
 const Featured = props => {
-	const [topJokes, setTopJokes] = useState([]);
+	const jokes = useSelector(state => state.jokes);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		axios
-			.get('/api/jokes/top')
-			.then(res => setTopJokes(res.data))
-			.catch(err => console.log(err));
-	}, []);
+		dispatch(getTopJokes());
+	}, [dispatch]);
 
 	return (
-		<div className="featured">
-			<h3>Best Rated Jokes</h3>
-			<div className="d-md-flex justify-content-between pb-2">
-				{topJokes.map(joke => (
-					<JokeItem key={joke._id} joke={joke} />
-				))}
+		<div className="featured px-2">
+			<h3 className="pl-1 pt-2">Best Rated Jokes</h3>
+			<div className="d-md-flex justify-content-around pb-2">
+				{jokes.topjokes === null || jokes.loading ? (
+					<Spinner isTopRated={true} />
+				) : (
+					jokes.topjokes.map(joke => (
+						<JokeItem key={joke._id} joke={joke} topRated={true} />
+					))
+				)}
 			</div>
 			<hr />
 		</div>

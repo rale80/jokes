@@ -38,6 +38,9 @@ const jokeSchema = new mongoose.Schema(
 					type: mongoose.Schema.Types.ObjectId,
 					ref: 'User'
 				},
+				username: {
+					type: String
+				},
 				text: {
 					type: String,
 					minlength: 10,
@@ -50,6 +53,9 @@ const jokeSchema = new mongoose.Schema(
 				}
 			}
 		],
+		username: {
+			type: String
+		},
 		author: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User'

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/actions/authActions';
 
 const Navbar = props => {
+	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	const onLogoutClick = e => {
@@ -40,21 +41,26 @@ const Navbar = props => {
 								New Joke
 							</Link>
 						</li>
-						<li className="nav-item">
-							<Link className="nav-link" to="/register">
-								Register
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link" to="/login">
-								Login
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link" to="#" onClick={onLogoutClick}>
-								<i className="fas fa-user-astronaut"></i> Logout
-							</Link>
-						</li>
+						{auth.isAuthenticated ? (
+							<li className="nav-item">
+								<Link className="nav-link" to="#" onClick={onLogoutClick}>
+									<i className="fas fa-user-astronaut"></i> Logout
+								</Link>
+							</li>
+						) : (
+							<>
+								<li className="nav-item">
+									<Link className="nav-link" to="/register">
+										Register
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link className="nav-link" to="/login">
+										Login
+									</Link>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 			</nav>

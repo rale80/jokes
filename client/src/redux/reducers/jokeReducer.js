@@ -1,9 +1,17 @@
-import { ADD_JOKE } from '../actionTypes';
+import {
+	ADD_JOKE,
+	GET_JOKES,
+	JOKES_LOADING,
+	GET_TOP_JOKES,
+	GET_JOKE
+} from '../actionTypes';
 
 const initialState = {
 	jokes: [],
+	topjokes: [],
 	joke: {},
-	loading: false
+	loading: false,
+	like: false
 };
 
 const jokeReducer = (state = initialState, action) => {
@@ -12,6 +20,29 @@ const jokeReducer = (state = initialState, action) => {
 			return {
 				...state,
 				jokes: [action.payload, ...state.jokes]
+			};
+		case JOKES_LOADING:
+			return {
+				...state,
+				loading: true
+			};
+		case GET_JOKES:
+			return {
+				...state,
+				jokes: action.payload,
+				loading: false
+			};
+		case GET_TOP_JOKES:
+			return {
+				...state,
+				topjokes: action.payload,
+				loading: false
+			};
+		case GET_JOKE:
+			return {
+				...state,
+				joke: action.payload,
+				loading: false
 			};
 		default:
 			return state;
