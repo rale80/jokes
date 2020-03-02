@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { deleteComment } from '../../redux/actions/jokeActions';
 
 const CommentItem = props => {
@@ -34,6 +35,11 @@ const CommentItem = props => {
 			</div>
 		</div>
 	);
+};
+
+CommentItem.propTypes = {
+	jokeId: PropTypes.string.isRequired,
+	comment: PropTypes.object.isRequired
 };
 
 export default CommentItem;

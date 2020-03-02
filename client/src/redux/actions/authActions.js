@@ -17,7 +17,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login user
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = (userData, history, from) => dispatch => {
 	axios
 		.post('/api/users/login', userData)
 		.then(res => {
@@ -27,7 +27,7 @@ export const loginUser = (userData, history) => dispatch => {
 
 			const decoded = jwtDecode(token);
 			dispatch(setCurrentUser(decoded));
-			history.push('/');
+			history.replace(from);
 		})
 		.catch(err => {
 			dispatch({

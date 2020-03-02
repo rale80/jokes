@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { addLike, removeLike } from '../../redux/actions/jokeActions';
 
 const JokeItem = props => {
@@ -69,6 +70,11 @@ const JokeItem = props => {
 			</div>
 		</div>
 	);
+};
+
+JokeItem.propTypes = {
+	joke: PropTypes.object.isRequired,
+	topRated: PropTypes.bool.isRequired
 };
 
 export default JokeItem;

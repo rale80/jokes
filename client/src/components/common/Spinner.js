@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Spinner = props => {
 	return props.isTopRated ? (
@@ -6,6 +7,10 @@ const Spinner = props => {
 	) : (
 		<div className="lds-dual-ring-blue"></div>
 	);
+};
+
+Spinner.propTypes = {
+	isTopRated: PropTypes.bool
 };
 
 export default Spinner;

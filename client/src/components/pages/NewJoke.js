@@ -4,6 +4,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { addJoke } from '../../redux/actions/jokeActions';
 import { clearErrors } from '../../redux/actions/jokeActions';
+import { useHistory } from 'react-router-dom';
 
 const NewJoke = props => {
 	const [text, setText] = useState('');
@@ -11,6 +12,7 @@ const NewJoke = props => {
 
 	const errors = useSelector(state => state.errors);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const options = [
 		{ label: '---Select category---', value: 0 },
@@ -34,7 +36,7 @@ const NewJoke = props => {
 	const submitNewJoke = e => {
 		e.preventDefault();
 		const jokeData = { text, category };
-		dispatch(addJoke(jokeData, props.history));
+		dispatch(addJoke(jokeData, history));
 	};
 
 	return (

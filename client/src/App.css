@@ -91,5 +91,6 @@ a.navbar-brand {
 @media (min-width: 769px) {
 	.card {
 		width: 33%;
+		box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 	}
 }

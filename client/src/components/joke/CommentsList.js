@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CommentItem from './CommentItem';
 
 const CommentsList = props => {
@@ -15,6 +16,11 @@ const CommentsList = props => {
 			</div>
 		</div>
 	);
+};
+
+CommentsList.propTypes = {
+	comments: PropTypes.array.isRequired,
+	jokeId: PropTypes.string.isRequired
 };
 
 export default CommentsList;

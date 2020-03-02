@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { registerUser, clearErrors } from '../../redux/actions/authActions';
+import { useHistory } from 'react-router-dom';
 
 const Register = props => {
 	const [username, setUsername] = useState('');
@@ -12,20 +13,21 @@ const Register = props => {
 	const auth = useSelector(state => state.auth);
 	const errors = useSelector(state => state.errors);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		if (auth.isAuthenticated) {
-			props.history.push('/');
+			history.push('/');
 		}
 		return () => {
 			dispatch(clearErrors());
 		};
-	}, [auth.isAuthenticated, dispatch, props.history]);
+	}, [auth.isAuthenticated, dispatch, history]);
 
 	const submitRegister = e => {
 		e.preventDefault();
 		const newUser = { username, email, password, password2 };
-		dispatch(registerUser(newUser, props.history));
+		dispatch(registerUser(newUser, history));
 	};
 
 	return (

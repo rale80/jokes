@@ -20,19 +20,19 @@ const Joke = props => {
 	return (
 		<div className="joke">
 			<div className="container">
-				<div className="row">
-					<div className="col-md-12">
-						{joke === null || loading || isEmpty(joke) ? (
+				{joke === null || loading || isEmpty(joke) ? (
+					<div className="row">
+						<div className="col-md-12">
 							<Spinner />
-						) : (
-							<div>
-								<JokeItemSingle joke={joke} />
-								<CommentForm jokeId={joke._id} />
-								<CommentsList comments={joke.comments} jokeId={joke._id} />
-							</div>
-						)}
+						</div>
 					</div>
-				</div>
+				) : (
+					<>
+						<JokeItemSingle joke={joke} />
+						<CommentForm jokeId={joke._id} />
+						<CommentsList comments={joke.comments} jokeId={joke._id} />
+					</>
+				)}
 			</div>
 		</div>
 	);
