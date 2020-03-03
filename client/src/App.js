@@ -10,7 +10,7 @@ import Register from './components/pages/Register';
 import Login from './components/pages/Login';
 import Footer from './components/layout/Footer';
 import PrivateRoute from './components/common/PrivateRoute';
-import { setCurrentUser, logoutUser } from './redux/actions/authActions';
+import { setCurrentUser } from './redux/actions/authActions';
 import setAuthHeader from './utils/setAuthHeader';
 import './App.css';
 
@@ -23,12 +23,6 @@ function App() {
 		const decoded = jwtDecode(localStorage['jwtToken']);
 		dispatch(setCurrentUser(decoded));
 	}
-	// 	const currentTime = Date.now() / 1000;
-	// 	if (decoded.exp < currentTime) {
-	// 		dispatch(logoutUser());
-	// 		window.location.href = '/login';
-	// 	}
-	// }
 
 	return (
 		<Router>

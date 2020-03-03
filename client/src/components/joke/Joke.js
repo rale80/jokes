@@ -6,7 +6,7 @@ import CommentsList from './CommentsList';
 import CommentForm from './CommentForm';
 import JokeItemSingle from './JokeItemSingle';
 import { useParams } from 'react-router-dom';
-import { getJoke } from '../../redux/actions/jokeActions';
+import { getJoke, clearJoke } from '../../redux/actions/jokeActions';
 
 const Joke = props => {
 	const { joke, loading } = useSelector(state => state.jokes);
@@ -15,6 +15,10 @@ const Joke = props => {
 
 	useEffect(() => {
 		dispatch(getJoke(id));
+
+		return () => {
+			dispatch(clearJoke());
+		};
 	}, [dispatch, id]);
 
 	return (

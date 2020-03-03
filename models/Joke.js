@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 
 const jokeSchema = new mongoose.Schema(
 	{
+		author: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		},
+		username: {
+			type: String,
+			required: true
+		},
 		text: {
 			type: String,
 			required: true,
@@ -39,7 +47,8 @@ const jokeSchema = new mongoose.Schema(
 					ref: 'User'
 				},
 				username: {
-					type: String
+					type: String,
+					required: true
 				},
 				text: {
 					type: String,
@@ -52,14 +61,7 @@ const jokeSchema = new mongoose.Schema(
 					default: Date.now
 				}
 			}
-		],
-		username: {
-			type: String
-		},
-		author: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User'
-		}
+		]
 	},
 	{ timestamps: true }
 );

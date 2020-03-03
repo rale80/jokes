@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteJoke } from '../../redux/actions/jokeActions';
+import { useHistory } from 'react-router-dom';
 
 const JokeItemSingle = props => {
 	const { joke } = props;
+	const { user } = useSelector(state => state.auth);
+	const dispatch = useDispatch();
+	const history = useHistory();
 
 	return (
 		<div className="singleJoke row mt-3">
@@ -19,6 +25,15 @@ const JokeItemSingle = props => {
 					<div className="col-md-10">
 						<p className="lead px-md-5 pt-md-3">{joke.text}</p>
 					</div>
+					{joke.author === user.id ? (
+						<button
+							onClick={() => dispatch(deleteJoke(joke._id, history))}
+							type="button"
+							className="btn btn-danger btn-absolute"
+							style={{ top: '5px' }}>
+							<i className="fas fa-times" />
+						</button>
+					) : null}
 				</div>
 			</div>
 		</div>

@@ -13,7 +13,6 @@ const validateCommentInput = require('../../validation/comment');
  */
 router.get('/', (req, res) => {
 	Joke.find({})
-		.populate('author', 'username')
 		.sort({ createdAt: -1 })
 		.then(jokes => {
 			return res.status(200).json(jokes);
@@ -27,16 +26,14 @@ router.get('/', (req, res) => {
  * @access	Public
  */
 router.get('/top', (req, res) => {
-	Joke.find({})
-		.populate('author', 'username')
-		.exec((err, jokes) => {
-			if (err) return logger.error(err);
+	Joke.find({}).exec((err, jokes) => {
+		if (err) return logger.error(err);
 
-			let sorted = jokes
-				.sort((prev, curr) => (prev.likes.length >= curr.likes.length ? -1 : 1))
-				.slice(0, 3);
-			return res.status(200).json(sorted);
-		});
+		let sorted = jokes
+			.sort((prev, curr) => (prev.likes.length >= curr.likes.length ? -1 : 1))
+			.slice(0, 3);
+		return res.status(200).json(sorted);
+	});
 });
 
 /**
@@ -48,7 +45,6 @@ router.get('/:jokeId', (req, res) => {
 	const { jokeId } = req.params;
 
 	Joke.findById(jokeId)
-		.populate('author', 'username')
 		.then(joke => {
 			return res.status(200).json(joke);
 		})
@@ -69,7 +65,12 @@ router.post('/', auth, (req, res) => {
 		return res.status(400).json(errors);
 	}
 
-	const newJoke = new Joke({ text, category, author: user.id });
+	const newJoke = new Joke({
+		text,
+		category,
+		author: user.id,
+		username: user.username
+	});
 	newJoke
 		.save()
 		.then(savedJoke => res.status(200).json(savedJoke))
@@ -78,7 +79,7 @@ router.post('/', auth, (req, res) => {
 
 /**
  * @route		Put api/jokes/:jokeId
- * @desc  	Get joke by id
+ * @desc  	Edit joke by id
  * @access	Private
  */
 router.put('/:jokeId', auth, (req, res) => {

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { addLike, removeLike } from '../../redux/actions/jokeActions';
 
 const JokeItem = props => {
-	const { _id, text, createdAt, author, likes } = props.joke;
+	const { _id, text, createdAt, likes, username } = props.joke;
 	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -42,9 +42,9 @@ const JokeItem = props => {
 						'bg-top-rated': props.topRated
 					}
 				)}>
-				<small>Author: {author.username}</small>
+				<small>{username}</small>
 				<small>
-					Date: <Moment format="DD/MM/YYYY">{createdAt}</Moment>
+					<Moment format="DD/MM/YYYY">{createdAt}</Moment>
 				</small>
 			</div>
 			<div className="card-body pb-5">

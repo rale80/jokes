@@ -3,7 +3,8 @@ import {
 	GET_JOKES,
 	JOKES_LOADING,
 	GET_TOP_JOKES,
-	GET_JOKE
+	GET_JOKE,
+	CLEAR_JOKE
 } from '../actionTypes';
 
 const initialState = {
@@ -43,6 +44,11 @@ const jokeReducer = (state = initialState, action) => {
 				...state,
 				joke: action.payload,
 				loading: false
+			};
+		case CLEAR_JOKE:
+			return {
+				...state,
+				joke: action.payload
 			};
 		default:
 			return state;

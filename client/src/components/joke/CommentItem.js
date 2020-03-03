@@ -22,15 +22,16 @@ const CommentItem = props => {
 					</div>
 					<div className="col-md-10">
 						<p className="lead">{comment.text}</p>
-						{comment.author.toString() === user.id ? (
-							<button
-								onClick={() => dispatch(deleteComment(jokeId, comment._id))}
-								type="button"
-								className="btn btn-danger btn-absolute">
-								<i className="fas fa-times" />
-							</button>
-						) : null}
 					</div>
+					{comment.author.toString() === user.id ? (
+						<button
+							onClick={() => dispatch(deleteComment(jokeId, comment._id))}
+							type="button"
+							className="btn btn-danger btn-absolute"
+							style={{ top: '5px' }}>
+							<i className="fas fa-times" />
+						</button>
+					) : null}
 				</div>
 			</div>
 		</div>

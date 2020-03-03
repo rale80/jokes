@@ -6,3 +6,4 @@ export const JOKES_LOADING = 'JOKES_LOADING';
 export const GET_JOKES = 'GET_JOKES';
 export const GET_TOP_JOKES = 'GET_TOP_JOKES';
 export const GET_JOKE = 'GET_JOKE';
+export const CLEAR_JOKE = 'CLEAR_JOKE';

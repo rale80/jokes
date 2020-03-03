@@ -5,7 +5,8 @@ import {
 	GET_JOKES,
 	GET_JOKE,
 	GET_TOP_JOKES,
-	JOKES_LOADING
+	JOKES_LOADING,
+	CLEAR_JOKE
 } from '../actionTypes';
 
 export const loadingJokes = () => {
@@ -78,6 +79,31 @@ export const getJoke = id => dispatch => {
 		});
 };
 
+export const clearJoke = () => {
+	return {
+		type: CLEAR_JOKE,
+		payload: {}
+	};
+};
+
+export const deleteJoke = (id, history) => dispatch => {
+	axios
+		.delete(`/api/jokes/${id}`)
+		.then(res => {
+			dispatch({
+				type: CLEAR_JOKE,
+				payload: {}
+			});
+			history.push('/');
+		})
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
+};
+
 export const addLike = id => dispatch => {
 	axios
 		.post(`/api/jokes/like/${id}`)
@@ -85,7 +111,12 @@ export const addLike = id => dispatch => {
 			dispatch(getJokes());
 			dispatch(getTopJokes());
 		})
-		.catch(err => console.log(err));
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
 };
 
 export const removeLike = id => dispatch => {
