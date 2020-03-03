@@ -22,13 +22,13 @@ function App() {
 		setAuthHeader(localStorage['jwtToken']);
 		const decoded = jwtDecode(localStorage['jwtToken']);
 		dispatch(setCurrentUser(decoded));
-
-		const currentTime = Date.now() / 1000;
-		if (decoded.exp < currentTime) {
-			dispatch(logoutUser());
-			window.location.href = '/login';
-		}
 	}
+	// 	const currentTime = Date.now() / 1000;
+	// 	if (decoded.exp < currentTime) {
+	// 		dispatch(logoutUser());
+	// 		window.location.href = '/login';
+	// 	}
+	// }
 
 	return (
 		<Router>

@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
+import checkTokenExpirationMiddleware from './checkTokenExpirationMiddleware';
 
 const composeEnhancers =
 	process.env.NODE_ENV === 'development'
@@ -9,5 +10,5 @@ const composeEnhancers =
 
 export default createStore(
 	rootReducer,
-	composeEnhancers(applyMiddleware(thunk))
+	composeEnhancers(applyMiddleware(checkTokenExpirationMiddleware, thunk))
 );

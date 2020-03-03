@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { addLike, removeLike } from '../../redux/actions/jokeActions';
 
@@ -11,13 +11,20 @@ const JokeItem = props => {
 	const { _id, text, createdAt, author, likes } = props.joke;
 	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const onJokeLike = id => {
-		dispatch(addLike(id));
+		if (auth.isAuthenticated) {
+			dispatch(addLike(id));
+		}
+		history.push('/login');
 	};
 
 	const onJokeUnlike = id => {
-		dispatch(removeLike(id));
+		if (auth.isAuthenticated) {
+			dispatch(removeLike(id));
+		}
+		history.push('/login');
 	};
 
 	const findUserLike = likes =>
