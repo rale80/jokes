@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
@@ -24,7 +24,14 @@ const JokeItemSingle = props => {
 						<p style={{ textAlign: 'center' }}>{joke.username}</p>
 					</div>
 					<div className="col-md-10">
-						<p className="lead px-md-5 pt-md-3">{joke.text}</p>
+						<p className="lead px-md-5 pt-md-3">
+							{joke.text.split('\n').map((item, key) => (
+								<Fragment key={key}>
+									{item}
+									<br />
+								</Fragment>
+							))}
+						</p>
 					</div>
 					{joke.author === user.id ? (
 						<div className="btn-group-vertical btn-absolute">

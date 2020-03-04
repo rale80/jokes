@@ -1,11 +1,12 @@
-import React from 'react';
-import Moment from 'react-moment';
-import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from 'lodash';
+import React, { Fragment } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import Moment from 'react-moment';
+import { isEmpty } from 'lodash';
 import { addLike, removeLike } from '../../redux/actions/jokeActions';
+import makeExcerpt from '../../utils/makeExcerpt';
 
 const JokeItem = props => {
 	const { _id, text, createdAt, likes, username, category } = props.joke;
@@ -55,7 +56,19 @@ const JokeItem = props => {
 				</div>
 			</div>
 			<div className="card-body pb-5">
-				<p className="card-text">{text}</p>
+				<p className="card-text">
+					{makeExcerpt(text, 150)
+						.split('\n')
+						.map((item, key) => (
+							<Fragment key={key}>
+								{item}
+								<br />
+							</Fragment>
+						))}{' '}
+					{text.length > 150 ? (
+						<Link to={`/joke/${_id}`}>...read more</Link>
+					) : null}
+				</p>
 			</div>
 			<div className="card-footer">
 				<button
