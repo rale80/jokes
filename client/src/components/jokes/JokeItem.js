@@ -29,19 +29,11 @@ const JokeItem = props => {
 		}
 	};
 
-	const findUserLike = likes => {
-		if (
-			isEmpty(auth.user) ||
-			likes.findIndex(like => like.author === auth.user.id) === -1
-		) {
-			return false;
-		}
-		return true;
-	};
-	// isEmpty(auth.user) ||
-	// likes.findIndex(like => like.author === auth.user.id) === -1
-	// 	? false
-	// 	: true;
+	const findUserLike = likes =>
+		isEmpty(auth.user) ||
+		likes.findIndex(like => like.author === auth.user.id) === -1
+			? false
+			: true;
 
 	return (
 		<div className="card mb-3 mr-1">

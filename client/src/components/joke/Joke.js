@@ -15,10 +15,6 @@ const Joke = props => {
 
 	useEffect(() => {
 		dispatch(getJoke(id));
-
-		// return () => {
-		// 	dispatch(clearJoke());
-		// };
 	}, [dispatch, id]);
 
 	return (

@@ -11,8 +11,7 @@ const initialState = {
 	jokes: [],
 	topjokes: [],
 	joke: {},
-	loading: false,
-	like: false
+	loading: false
 };
 
 const jokeReducer = (state = initialState, action) => {
