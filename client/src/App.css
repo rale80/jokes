@@ -89,9 +89,15 @@ a.navbar-brand {
 }
 
 /* Media queries */
-@media (min-width: 769px) {
+@media (min-width: 992px) {
 	.card {
-		width: 33%;
+		width: 32%;
+		box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+	}
+}
+@media (min-width: 769px) and (max-width: 991px) {
+	.card {
+		width: 49%;
 		box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 	}
 }

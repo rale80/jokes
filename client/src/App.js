@@ -27,7 +27,7 @@ function App() {
 
 	return (
 		<Router>
-			<div className="app container">
+			<div className="app container-md">
 				<Navbar />
 				<Switch>
 					<Route exact path="/" component={Home} />
