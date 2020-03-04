@@ -86,6 +86,20 @@ export const clearJoke = () => {
 	};
 };
 
+export const editJoke = (id, jokeData, history) => dispatch => {
+	axios
+		.put(`/api/jokes/${id}`, jokeData)
+		.then(res => {
+			history.push('/');
+		})
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
+};
+
 export const deleteJoke = (id, history) => dispatch => {
 	axios
 		.delete(`/api/jokes/${id}`)

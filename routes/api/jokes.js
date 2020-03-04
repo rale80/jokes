@@ -83,9 +83,14 @@ router.post('/', auth, (req, res) => {
  * @access	Private
  */
 router.put('/:jokeId', auth, (req, res) => {
+	const { errors, isValid } = validateJokeInput(req.body);
 	const { jokeId } = req.params;
 	const { text, category } = req.body;
 	const user = req.user;
+
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
 
 	Joke.findById(jokeId)
 		.then(joke => {
@@ -99,7 +104,7 @@ router.put('/:jokeId', auth, (req, res) => {
 					.catch(err => logger.error(err));
 			} else {
 				return res.status(401).json({
-					nopermission: 'You do not have permission to update this joke'
+					nopermission: 'You do not have permission to delete this joke'
 				});
 			}
 		})

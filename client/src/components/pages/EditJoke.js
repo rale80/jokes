@@ -2,17 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
-import { addJoke } from '../../redux/actions/jokeActions';
+import { editJoke } from '../../redux/actions/jokeActions';
 import { clearErrors } from '../../redux/actions/jokeActions';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
-const NewJoke = props => {
-	const [text, setText] = useState('');
-	const [category, setCategory] = useState('');
-
+const EditJoke = props => {
+	const { joke } = useSelector(state => state.jokes);
+	const auth = useSelector(state => state.auth);
 	const errors = useSelector(state => state.errors);
+
+	const [text, setText] = useState(joke.text);
+	const [category, setCategory] = useState(joke.category);
+
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { id } = useParams();
 
 	const options = [
 		{ label: '---Select category---', value: 0 },
@@ -28,24 +32,28 @@ const NewJoke = props => {
 	];
 
 	useEffect(() => {
+		if (!auth.isAuthenticated || auth.user.id !== joke.author) {
+			history.push(`/joke/${id}`);
+		}
+
 		return () => {
 			dispatch(clearErrors());
 		};
-	}, [dispatch]);
+	}, [id, auth.isAuthenticated, auth.user.id, joke.author, history, dispatch]);
 
-	const submitNewJoke = e => {
+	const submitEditJoke = e => {
 		e.preventDefault();
 		const jokeData = { text, category };
-		dispatch(addJoke(jokeData, history));
+		dispatch(editJoke(id, jokeData, history));
 	};
 
 	return (
-		<div className="newjoke">
+		<div className="editjoke">
 			<div className="container">
 				<div className="row">
 					<div className="col-md-8 m-auto">
-						<h1 className="display-4 text-center">Create New Joke</h1>
-						<form onSubmit={submitNewJoke}>
+						<h1 className="display-4 text-center">Edit Joke</h1>
+						<form onSubmit={submitEditJoke}>
 							<TextAreaFieldGroup
 								value={text}
 								rows={5}
@@ -71,4 +79,4 @@ const NewJoke = props => {
 	);
 };
 
-export default NewJoke;
+export default EditJoke;

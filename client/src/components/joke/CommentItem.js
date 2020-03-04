@@ -29,7 +29,7 @@ const CommentItem = props => {
 							type="button"
 							className="btn btn-danger btn-absolute"
 							style={{ top: '5px' }}>
-							<i className="fas fa-times" />
+							<i className="fas fa-trash-alt"></i>
 						</button>
 					) : null}
 				</div>

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteJoke } from '../../redux/actions/jokeActions';
-import { useHistory } from 'react-router-dom';
 
 const JokeItemSingle = props => {
 	const { joke } = props;
@@ -26,13 +27,20 @@ const JokeItemSingle = props => {
 						<p className="lead px-md-5 pt-md-3">{joke.text}</p>
 					</div>
 					{joke.author === user.id ? (
-						<button
-							onClick={() => dispatch(deleteJoke(joke._id, history))}
-							type="button"
-							className="btn btn-danger btn-absolute"
-							style={{ top: '5px' }}>
-							<i className="fas fa-times" />
-						</button>
+						<div className="btn-group-vertical btn-absolute">
+							<button
+								onClick={() => dispatch(deleteJoke(joke._id, history))}
+								type="button"
+								className="btn btn-danger">
+								<i className="fas fa-trash-alt"></i>
+							</button>
+							<Link
+								to={`/joke/${joke._id}/edit`}
+								type="button"
+								className="btn btn-primary">
+								<i className="fas fa-edit"></i>
+							</Link>
+						</div>
 					) : null}
 				</div>
 			</div>
